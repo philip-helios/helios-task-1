@@ -1,0 +1,23 @@
+/*style for contact form*/
+
+.wrapper-main {
+    min-height: 100vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center
+}
+
+.form-wrapper {
+    width: 50%;
+    margin: auto;
+}
+
+.form-wrapper label {
+    text-align: left;
+    margin-right: 10px;
+}
+.contact-form input {
+    margin: 5px;
+}
