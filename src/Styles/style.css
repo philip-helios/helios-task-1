@@ -63,3 +63,26 @@ table {
   .text-error {
     color: red;;
   }
+
+  /* style for button */
+
+  .btn {
+    font-size: inherit;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color:white;
+    border: none;
+  }
+
+  .btn-details {
+    text-decoration: none;
+    background-color: #218bff;
+  }
+
+  .red {
+    background-color: red;
+  }
+
+  .green {
+    background-color: green;
+  }

@@ -81,13 +81,17 @@ const Home = () => {
                     <th>Name</th>
                     <th>Contact</th>
                     <th>Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>          
                     {
-                    listData.map((data,i)=>
+                    listData?.map((data,i)=>
                         <tr key={i}>
                             <td>{data.name}</td>
                             <td>{data.contact}</td>
-                            <td><Link to={`contact/${i}`}>Details</Link></td>
+                            <td><Link to={`contact/${i}`}><button className='btn btn-details'>Details</button></Link></td>
+                            <td><button className='btn green'>Edit</button></td>
+                            <td><button className='btn red'>Delete</button></td>                       
                         </tr>
                         )
                     }         
