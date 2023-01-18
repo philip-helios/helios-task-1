@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from "../src/components/Home/Home"
+import Details from './components/Details/Details';
 
 function App() {
 
@@ -9,6 +10,10 @@ function App() {
     {
       path: "/",
       element: <Home></Home>
+    },
+    {
+      path: "contact/:id",
+      element:<Details></Details>,
     }
   ])
   return (

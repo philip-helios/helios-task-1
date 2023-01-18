@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
 
@@ -51,11 +52,11 @@ const Home = () => {
             <h2>Sample Contact Form</h2>
             <form onSubmit={handleSubmit} className='contact-form'> 
                 <div className='form-wrapper'>
-                    <div>
+                    <div className='form-control'>
                         <label htmlFor ="name">Name</label>
                         <input type ="text" name="name"/>
                     </div>
-                    <div>
+                    <div className='form-control'> 
                         <label htmlFor ="contact">Contact</label>
                         <input type = "text" name="contact"/>
                         <p className='text-error'>{error}</p>
@@ -71,12 +72,14 @@ const Home = () => {
                 <tr>
                     <th>Name</th>
                     <th>Contact</th>
+                    <th>Details</th>
                 </tr>          
                     {
                     listData.map((data,i)=>
                         <tr key={i}>
                             <td>{data.name}</td>
                             <td>{data.contact}</td>
+                            <td><Link to={`contact/${i}`}>Details</Link></td>
                         </tr>
                         )
                     }         
