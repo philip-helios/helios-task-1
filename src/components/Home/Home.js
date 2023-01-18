@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
@@ -7,6 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 const Home = () => {
     
     const [listData, setListData] = useState([]);
+
+    useEffect(()=>{
+        let data = JSON.parse(localStorage.getItem('information'));
+        setListData(data)
+    },[])
+    
     const [error,setError] = useState([]);
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
     
