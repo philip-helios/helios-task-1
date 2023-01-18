@@ -3,11 +3,12 @@ import '../../Styles/responsive.css'
 import '../../Styles/style.css'
 
 const Home = () => {
-
+    
+    const [listData, setListData] = useState([]);
     const [error,setError] = useState([]);
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    const printData = JSON.parse(localStorage.getItem('information'));
-    let arrayData = [];
+    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,15 +22,15 @@ const Home = () => {
                 name,
                 contact
             }
-            const data = person;
-    
-            
+            const data = person; 
+            let arrayData = JSON.parse(localStorage.getItem('information'));
             arrayData.push(data);
             localStorage.setItem('information', JSON.stringify(arrayData));
+            setListData(arrayData);
             
         }
         else {
-            let message = "Phone number is not valid"
+            let message = "Phone number is not valid";
             setError(message);
         }
         
@@ -72,7 +73,7 @@ const Home = () => {
                     <th>Contact</th>
                 </tr>          
                     {
-                      printData.map((data,i)=>
+                    listData.map((data,i)=>
                         <tr key={i}>
                             <td>{data.name}</td>
                             <td>{data.contact}</td>
