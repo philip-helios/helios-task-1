@@ -4,20 +4,27 @@ import '../../Styles/style.css'
 
 const Home = () => {
 
+    const printData = JSON.parse(localStorage.getItem('information'));
+    let arrayData = [];
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
+
+        let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
         
         const person = {
-            name,contact
+            name,
+            contact
         }
-
-        const data = JSON.stringify(person)
-        localStorage.setItem("Contact Information",data);
+        const data = person;
 
         
+        arrayData.push(data);
+        localStorage.setItem('information', JSON.stringify(arrayData));
+
     }
     return (
         <div className='wrapper-main'>
@@ -38,7 +45,22 @@ const Home = () => {
                         value="Submit"/>
                     </div>
                 </div>
-            </form> 
+            </form>
+            <table className='contact-table'>
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                </tr>          
+                    {
+                      printData.map((data,i)=>
+                        <tr key={i}>
+                            <td>{data.name}</td>
+                            <td>{data.contact}</td>
+                        </tr>
+                        )
+                    }         
+                
+                </table>
         </div>
     );
 };
