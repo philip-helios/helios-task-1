@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
     
@@ -20,6 +21,7 @@ const Home = () => {
         if(regex.test(contact)){
 
             const person = {
+                id: uuidv4(),
                 name,
                 contact
             }
