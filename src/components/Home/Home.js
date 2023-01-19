@@ -9,11 +9,10 @@ const Home = () => {
     
     const [listData, setListData] = useState([]);
 
-
-    useEffect(()=>{
-        let data = JSON.parse(localStorage.getItem('information'));
-        setListData(data)
-    },[])
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem('information'));
+        setListData(data);
+      }, [listData]);
     
     const [error,setError] = useState([]);
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
@@ -31,6 +30,7 @@ const Home = () => {
     }    
 
     const handleSubmit = (e) => {
+        
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -43,12 +43,11 @@ const Home = () => {
                 name,
                 contact
             }
-            const data = person; 
-            let arrayData = JSON.parse(localStorage.getItem('information'));
-            arrayData.push(data);
-            localStorage.setItem('information', JSON.stringify(arrayData));
-            setListData(arrayData);
             
+            listData.push(person)
+            localStorage.setItem('information', JSON.stringify(listData));
+            setListData()  
+                      
         }
         else {
             let message = "Phone number is not valid";
@@ -99,13 +98,13 @@ const Home = () => {
                     <div className='th'>Delete</div>
                 </div>          
                     {
-                    listData?.map((data,i)=>
+                        listData?.map((data,i)=>
                         <div className="tr" key={i}>
                             <div className='td'>{data.name}</div>
                             <div className='td'>{data.contact}</div>
                             <div className='td'><Link to={`contact/${data.id}`}><button className='btn btn-details'>Details</button></Link></div>
                             <div className='td'><button className='btn green'>Edit</button></div>
-                            <div className='td'><button onClick={()=> handleDelete(`${data.id}`)} className='btn red'>Delete</button></div>                       
+                            <div className='td'><button className='btn red'>Delete</button></div>                       
                         </div>
                         )
                     }         

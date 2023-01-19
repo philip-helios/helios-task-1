@@ -111,6 +111,9 @@
     border-style: inset;
  } 
 
+ .d-none {
+  display: none;
+ }
 
 
   /* write media query*/
