@@ -17,11 +17,16 @@ const Home = () => {
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
     const handleDelete = (id) => {
-        const person = JSON.parse(localStorage.getItem('information'));
-        const filtered = person.filter(pr => pr.id !== id);
-        localStorage.removeItem(filtered);
-    }
-    
+        // fetching all inforamtion from local storage
+        const entries = JSON.parse(localStorage.getItem('information'));
+
+        const filtered = entries.filter(entry => entry.id !== id);
+
+        setListData(filtered);
+
+        localStorage.setItem('information', JSON.stringify(listData));
+
+    }    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -61,6 +66,7 @@ const Home = () => {
         // localStorage.setItem('information', JSON.stringify(arrayData));
 
     }
+    
     return (
         <div className='wrapper-main'>
             <h2>Sample Contact Form</h2>
@@ -97,7 +103,7 @@ const Home = () => {
                             <div className='td'>{data.contact}</div>
                             <div className='td'><Link to={`contact/${i}`}><button className='btn btn-details'>Details</button></Link></div>
                             <div className='td'><button className='btn green'>Edit</button></div>
-                            <div className='td'><button onClick={handleDelete(`${data.id}`)} className='btn red'>Delete</button></div>                       
+                            <div className='td'><button onClick={()=> handleDelete(`${data.id}`)} className='btn red'>Delete</button></div>                       
                         </div>
                         )
                     }         
