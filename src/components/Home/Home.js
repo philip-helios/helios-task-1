@@ -15,8 +15,13 @@ const Home = () => {
     
     const [error,setError] = useState([]);
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    
 
+    const handleDelete = (id) => {
+        const person = JSON.parse(localStorage.getItem('information'));
+        const filtered = person.filter(pr => pr.id !== id);
+        localStorage.removeItem(filtered);
+    }
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,7 +48,8 @@ const Home = () => {
             setError(message);
         }
         
-        
+        // delete info form the list
+       
         // const person = {
         //     name,
         //     contact
@@ -76,27 +82,26 @@ const Home = () => {
                     </div>
                 </div>
             </form>
-            <table className='contact-table'>
-                <tr>
-                    <th>Name</th>
-                    <th>Contact</th>
-                    <th>Details</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>          
+            <div className='contact-table table'>
+                <div className="tr">
+                    <div className='th'>Name</div>
+                    <div className='th'>Contact</div>
+                    <div className='th'>Details</div>
+                    <div className='th'>Edit</div>
+                    <div className='th'>Delete</div>
+                </div>          
                     {
                     listData?.map((data,i)=>
-                        <tr key={i}>
-                            <td>{data.name}</td>
-                            <td>{data.contact}</td>
-                            <td><Link to={`contact/${i}`}><button className='btn btn-details'>Details</button></Link></td>
-                            <td><button className='btn green'>Edit</button></td>
-                            <td><button className='btn red'>Delete</button></td>                       
-                        </tr>
+                        <div className="tr" key={i}>
+                            <div className='td'>{data.name}</div>
+                            <div className='td'>{data.contact}</div>
+                            <div className='td'><Link to={`contact/${i}`}><button className='btn btn-details'>Details</button></Link></div>
+                            <div className='td'><button className='btn green'>Edit</button></div>
+                            <div className='td'><button onClick={handleDelete(`${data.id}`)} className='btn red'>Delete</button></div>                       
+                        </div>
                         )
                     }         
-                
-                </table>
+                </div>
         </div>
     );
 };

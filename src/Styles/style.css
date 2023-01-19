@@ -43,21 +43,35 @@
 
 /*style for table*/
 
-table {
+
+
+.table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 80%;
     margin:auto;
   }
   
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
+  .th,.td {
+    width:20%;
+    text-align: center;
     padding: 8px;
   }
+
+  .th {
+    border: 1px solid grey;
+    border-style: inset;
+  }
+
+  .tr {
+    display: flex;
+    font-weight: bold;
+    justify-content: space-evenly;
+  }
   
-  tr:nth-child(even) {
+  .tr:nth-child(even) {
     background-color: #dddddd;
+    display: flex;
   }
 
   .text-error {
@@ -85,4 +99,19 @@ table {
 
   .green {
     background-color: green;
+  }
+
+  /* write media query*/
+
+  @media only screen and (max-width: 600px) {
+     .table {
+      font-size: 12px;
+      width: 95%;
+      margin: auto;
+     }
+
+     .td {
+       width: auto;
+       border: none;
+     }
   }
