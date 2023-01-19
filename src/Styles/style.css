@@ -101,6 +101,18 @@
     background-color: green;
   }
 
+  /*details table style*/
+  
+ .dt-table-th,.dt-table-td {
+    width:25%;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid grey;
+    border-style: inset;
+ } 
+
+
+
   /* write media query*/
 
   @media only screen and (max-width: 600px) {

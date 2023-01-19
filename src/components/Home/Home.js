@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Home = () => {
     
     const [listData, setListData] = useState([]);
+
 
     useEffect(()=>{
         let data = JSON.parse(localStorage.getItem('information'));
@@ -101,13 +102,13 @@ const Home = () => {
                         <div className="tr" key={i}>
                             <div className='td'>{data.name}</div>
                             <div className='td'>{data.contact}</div>
-                            <div className='td'><Link to={`contact/${i}`}><button className='btn btn-details'>Details</button></Link></div>
+                            <div className='td'><Link to={`contact/${data.id}`}><button className='btn btn-details'>Details</button></Link></div>
                             <div className='td'><button className='btn green'>Edit</button></div>
                             <div className='td'><button onClick={()=> handleDelete(`${data.id}`)} className='btn red'>Delete</button></div>                       
                         </div>
                         )
                     }         
-                </div>
+            </div>
         </div>
     );
 };
