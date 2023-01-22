@@ -95,24 +95,50 @@ const Home = () => {
                     </div>
                 </div>
             </form>
-            <div className='contact-table table'>
+            <div class="table" id="results">
+                <div class='theader'>
+                    <div class='table_header'>Name</div>
+                    <div class='table_header'>Contact</div>
+                    <div class='table_header'>Details</div>
+                </div>
+                {   
+                    data?.map((dt,i)=>
+                    <div class='table_row' key = {dt.id}>
+                        <div class='table_small'>
+                        <div class='table_cell th-sm-bg'>Name</div>
+                        <div class='table_cell'>{dt.name}</div>
+                        </div>
+                        <div class='table_small'>
+                        <div class='table_cell th-sm-bg'>Contact</div>
+                        <div class='table_cell'>{dt.contact}</div>
+                        </div>
+                        <div class='table_small'>
+                        <div class='table_cell th-sm-bg'>Details</div>
+                        <div class='table_cell'><Link to={`contact/${dt.id}`}><button className='btn btn-details'>Details</button></Link></div>
+                        </div>           
+                    </div>
+                    )
+                }         
+            </div>
+            {/* <div className='contact-table table'>
                 <h2>Record Book</h2>
+                <div className='table-body'>
                 <div className="tr">
                     <div className='th'>Name</div>
                     <div className='th'>Contact</div>
                     <div className='th'>Details</div>
                 </div> 
                     {
-
                         data?.map((data,i)=>
                         <div className="tr" key={i}>
                             <div className='td'>{data.name}</div>
                             <div className='td'>{data.contact}</div>
-                            <div className='td'><Link to={`contact/${data.id}`}><button className='btn btn-details'>Details</button></Link></div>                                         
+                            <div className='td'></div>                                         
                         </div>
                         )
-                    }         
-            </div>
+                    }   
+                </div>      
+            </div> */}
         </div>
     );
 };

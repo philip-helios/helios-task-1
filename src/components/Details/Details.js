@@ -13,7 +13,7 @@ const Details = () => {
 
     const navigate = useNavigate();
 
-    
+    console.log(data)
     useEffect(()=> {
 
         const parsedArr = JSON.parse(localStorage.getItem("information"));
@@ -61,13 +61,43 @@ const Details = () => {
     return (
         <div className='details-table table'>
             <h2>Record Book</h2>
-            <div className="tr">
+            <div class="table" id="results">
+                <div class='theader'>
+                    <div class='table_header'>Name</div>
+                    <div class='table_header'>Contact</div>
+                    <div class='table_header'>Edit</div>
+                    <div class='table_header'>Delete</div>
+                </div>
+                {   
+                    data?.map((dt,i)=>
+                    <div class='table_row' key = {dt.id}>
+                        <div class='table_small'>
+                            <div class='table_cell th-sm-bg'>Name</div>
+                            <div class='table_cell'>{dt.name}</div>
+                        </div>
+                        <div class='table_small'>
+                            <div class='table_cell th-sm-bg'>Contact</div>
+                            <div class='table_cell'>{dt.contact}</div>
+                        </div>
+                        <div class='table_small'>
+                            <div class='table_cell th-sm-bg'>Edit</div>
+                            <div class='table_cell'><button onClick={handleEdit} className='btn green'>Edit</button></div>
+                        </div> 
+                        <div class='table_small'>
+                            <div class='table_cell th-sm-bg'>Delete</div>
+                            <div class='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>
+                        </div>          
+                    </div>
+                    )
+                }         
+            </div>
+            {/* <div className="tr">
                 <div className='dt-table-th'>Name</div>
                 <div className='dt-table-th'>Contact</div>
                 <div className='dt-table-th'>Edit</div>
                 <div className='dt-table-th'>Delete</div>
-            </div>          
-            { 
+            </div>           */}
+            {/* { 
               data.map(rc=>
                 <div className="tr" key={rc.id}>
                     <div className='dt-table-td'>{rc.name}</div>
@@ -76,7 +106,7 @@ const Details = () => {
                     <div className='dt-table-td'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>                       
                 </div> 
                 )          
-            }
+            } */}
             {
                 data.map(rc=>
                     <form key={rc.id} onSubmit={handleSubmit} className='contact-form d-none' id="editForm">
