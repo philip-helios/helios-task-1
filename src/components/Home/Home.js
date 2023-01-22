@@ -3,31 +3,28 @@ import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
 import { v4 as uuidv4 } from 'uuid';
+import { getLocal } from '../fetchLocal.js/FetchLocal';
+
 
 
 const Home = () => {
     
-    const [listData, setListData] = useState([]);
-
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('information'));
-        setListData(data);
-      }, [listData]);
-    
+    const [data, setData] = useState([]);
+    const [refreskKey,setRefreshKey] = useState(0);
     const [error,setError] = useState([]);
+
+    // fetch data from local storage
+    useEffect(()=> {
+        const parsedArr = JSON.parse(localStorage.getItem("information"));    
+        setData(parsedArr);
+      
+    },[refreskKey])
+    
+
+    
+    
+    // submit new entry after validating phone number
     let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-
-    const handleDelete = (id) => {
-        // fetching all inforamtion from local storage
-        const entries = JSON.parse(localStorage.getItem('information'));
-
-        const filtered = entries.filter(entry => entry.id !== id);
-
-        setListData(filtered);
-
-        localStorage.setItem('information', JSON.stringify(listData));
-
-    }    
 
     const handleSubmit = (e) => {
         
@@ -36,6 +33,8 @@ const Home = () => {
         const name = form.name.value;
         const contact = form.contact.value;
 
+
+        // execute rest of the function upon matching phone number
         if(regex.test(contact)){
 
             const person = {
@@ -43,36 +42,43 @@ const Home = () => {
                 name,
                 contact
             }
+
+            // create a new array and push data as object in new array
+
+            if(data == null){
+
+                let newData = [];
+                newData.push(person)
+                localStorage.setItem('information', JSON.stringify(newData));
             
-            listData.push(person)
-            localStorage.setItem('information', JSON.stringify(listData));
-            setListData()  
+            }
+
+            // push data to existing array
+
+            else {
+                const existData = JSON.parse(localStorage.getItem("information"));
+                existData.push(person);
+                localStorage.setItem('information', JSON.stringify(existData));
+            }
+            
                       
         }
+
+        // show erro message if phone number doesn't match with regex 
         else {
             let message = "Phone number is not valid";
             setError(message);
         }
-        
-        // delete info form the list
-       
-        // const person = {
-        //     name,
-        //     contact
-        // }
-        // const data = person;
 
-        
-        // arrayData.push(data);
-        // localStorage.setItem('information', JSON.stringify(arrayData));
+        setRefreshKey(oldKey=> oldKey + 1);
 
     }
     
     return (
         <div className='wrapper-main'>
-            <h2>Sample Contact Form</h2>
             <form onSubmit={handleSubmit} className='contact-form'> 
                 <div className='form-wrapper'>
+                    <h2>Sample Contact Form</h2>
                     <div className='form-control'>
                         <label htmlFor ="name">Name</label>
                         <input type ="text" name="name"/>
@@ -90,21 +96,19 @@ const Home = () => {
                 </div>
             </form>
             <div className='contact-table table'>
+                <h2>Record Book</h2>
                 <div className="tr">
                     <div className='th'>Name</div>
                     <div className='th'>Contact</div>
                     <div className='th'>Details</div>
-                    <div className='th'>Edit</div>
-                    <div className='th'>Delete</div>
-                </div>          
+                </div> 
                     {
-                        listData?.map((data,i)=>
+
+                        data?.map((data,i)=>
                         <div className="tr" key={i}>
                             <div className='td'>{data.name}</div>
                             <div className='td'>{data.contact}</div>
-                            <div className='td'><Link to={`contact/${data.id}`}><button className='btn btn-details'>Details</button></Link></div>
-                            <div className='td'><button className='btn green'>Edit</button></div>
-                            <div className='td'><button className='btn red'>Delete</button></div>                       
+                            <div className='td'><Link to={`contact/${data.id}`}><button className='btn btn-details'>Details</button></Link></div>                                         
                         </div>
                         )
                     }         
