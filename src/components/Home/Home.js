@@ -24,8 +24,8 @@ const Home = () => {
     
     
     // submit new entry after validating phone number
-    let regex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    let regexName = /^[A-Z][-a-zA-Z]+$/;
     const handleSubmit = (e) => {
         
         e.preventDefault();
@@ -35,7 +35,7 @@ const Home = () => {
 
 
         // execute rest of the function upon matching phone number
-        if(regex.test(contact)){
+        if(regexPhone.test(contact) && regexName.test(name)){
 
             const person = {
                 id: uuidv4(),
@@ -66,7 +66,7 @@ const Home = () => {
 
         // show erro message if phone number doesn't match with regex 
         else {
-            let message = "Phone number is not valid";
+            let message = "Phone number or User Name is not valid";
             setError(message);
         }
 
@@ -81,11 +81,11 @@ const Home = () => {
                     <h2>Sample Contact Form</h2>
                     <div className='form-control'>
                         <label htmlFor ="name">Name</label>
-                        <input type ="text" name="name"/>
+                        <input type ="text" name="name" required/>
                     </div>
                     <div className='form-control'> 
                         <label htmlFor ="contact">Contact</label>
-                        <input type = "text" name="contact"/>
+                        <input type = "text" name="contact" required/>
                         <p className='text-error'>{error}</p>
                     </div>
                     <div>
