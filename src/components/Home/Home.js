@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
 import { v4 as uuidv4 } from 'uuid';
-import { getLocal } from '../fetchLocal.js/FetchLocal';
-
 
 
 const Home = () => {
