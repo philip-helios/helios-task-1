@@ -8,7 +8,8 @@ const Home = () => {
     
     const [data, setData] = useState([]);
     const [refreskKey,setRefreshKey] = useState(0);
-    const [error,setError] = useState([]);
+    const [nameError,setNameError] = useState([]);
+    const [phoneError,setPhoneError] = useState([]);
 
     // fetch data from local storage
     useEffect(()=> {
@@ -18,15 +19,28 @@ const Home = () => {
     
     // submit new entry after validating phone number
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    let regexName = /^[A-Z][-a-zA-Z]+$/;
+    let regexName = /^[A-Z][a-z ]{3,19}$/;
     
     const handleSubmit = (e) => {
+
+        setNameError("");
+        setPhoneError("");
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
         // execute rest of the function upon matching phone number
-        if(regexPhone.test(contact) && regexName.test(name)){
+        
+        if(!regexPhone.test(contact)) {
+            let message = "Phone number is not valid"
+            setPhoneError(message);
+        }
+        if(!regexName.test(name)){
+            let message = "Name is not valid"
+            setNameError(message);
+            return;
+        }
+        
             const person = {
                 id: uuidv4(),
                 name,
@@ -44,13 +58,12 @@ const Home = () => {
                 existData.push(person);
                 localStorage.setItem('information', JSON.stringify(existData));
             }           
-        }
-        // show error message if phone number doesn't match with regex 
-        else {
-            let message = "Phone number or User Name is not valid";
-            setError(message);
-        }
+        
+
         setRefreshKey(oldKey=> oldKey + 1);
+
+        // clear the value of input field and error messages when user submit correct info
+        
     }
     
     return (
@@ -61,11 +74,12 @@ const Home = () => {
                     <div className='form-control'>
                         <label htmlFor ="name">Name</label>
                         <input type ="text" name="name" required/>
+                        <p className='text-error'>{nameError}</p>
                     </div>
                     <div className='form-control'> 
                         <label htmlFor ="contact">Contact</label>
                         <input type = "text" name="contact" required/>
-                        <p className='text-error'>{error}</p>
+                        <p className='text-error'>{phoneError}</p>
                     </div>
                     <div>
                     <input className="form-button"

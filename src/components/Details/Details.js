@@ -6,11 +6,16 @@ import '../../Styles/style.scss'
 const Details = () => {
 
     const [data, setData] = useState([]);
-    const [error, setError] = useState([]);
+    const [nameError, setNameError] = useState([]);
+    const [phoneError, setPhoneError] = useState([]);
     const [contactList, setcontactList] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
     const { id } = useParams();
     const navigate = useNavigate();
+
+    // regex value for validating phone and contact
+    let regexName = /^[A-Z][a-z ]{3,19}$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
@@ -33,21 +38,30 @@ const Details = () => {
     }
 
     const handleSubmit = (e) => {
-        let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-        let regexName = /^[A-Z][-a-zA-Z]+$/;
+
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
-        const contact = form.contact.value;  
-        if(regexPhone.test(contact) && regexName.test(name)) {
+        const contact = form.contact.value;
         
-            handleUpdate(name,contact);
+        const testName = regexName.test(name);
+        const testPhone = regexPhone.test(contact);
+        
+        if(testName === false ){
+            setNameError("Name is not valid")
+        }
+        if(testPhone === false) {
+            setPhoneError("Phone number is not valid")
+        }
+        
+        if(testName && testPhone === true){
+            handleUpdate(name,contact); 
+            form.reset(""); 
             setRefreshKey(oldKey=> oldKey+ 1)
-        }
-        else {
-            let message = "Phone number or User Name is not valid";
-            setError(message);
-        }
+            // clear the value of input field and error messages when user submit correct info
+            setNameError("");
+            setPhoneError("");
+        }             
     }
 
     const handleUpdate = (name,contact) => { 
@@ -98,11 +112,12 @@ const Details = () => {
                             <div className='form-control'>
                                 <label htmlFor ="name">Name</label>
                                 <input type ="text" name="name" defaultValue={rc.name}/>
+                                <p className='text-error'>{nameError}</p>
                             </div>
                             <div className='form-control'> 
                                 <label htmlFor ="contact">Contact</label>
                                 <input type = "text" name="contact" defaultValue={rc.contact}/>
-                                <p className='text-error'>{error}</p>
+                                <p className='text-error'>{phoneError}</p>
                             </div>
                             <div> 
                             <input  className="form-button"
