@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../Styles/responsive.css'
-import '../../Styles/style.css'
+import '../../Styles/style.scss'
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -14,62 +13,44 @@ const Home = () => {
     // fetch data from local storage
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));    
-        setData(parsedArr);
-      
+        setData(parsedArr);    
     },[refreskKey])
-    
-
-    
     
     // submit new entry after validating phone number
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
     let regexName = /^[A-Z][-a-zA-Z]+$/;
+    
     const handleSubmit = (e) => {
-        
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-
-
         // execute rest of the function upon matching phone number
         if(regexPhone.test(contact) && regexName.test(name)){
-
             const person = {
                 id: uuidv4(),
                 name,
                 contact
             }
-
             // create a new array and push data as object in new array
-
-            if(data == null){
-
+            if(!data){
                 let newData = [];
                 newData.push(person)
                 localStorage.setItem('information', JSON.stringify(newData));
-            
             }
-
             // push data to existing array
-
             else {
                 const existData = JSON.parse(localStorage.getItem("information"));
                 existData.push(person);
                 localStorage.setItem('information', JSON.stringify(existData));
-            }
-            
-                      
+            }           
         }
-
         // show error message if phone number doesn't match with regex 
         else {
             let message = "Phone number or User Name is not valid";
             setError(message);
         }
-
         setRefreshKey(oldKey=> oldKey + 1);
-
     }
     
     return (

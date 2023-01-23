@@ -1,33 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../../Styles/responsive.css'
-import '../../Styles/style.css'
+import '../../Styles/style.scss'
 
 
 const Details = () => {
 
     const [data, setData] = useState([]);
     const [error, setError] = useState([]);
-    const [existArr, setExistArr] = useState([]);
+    const [contactList, setcontactList] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
     const { id } = useParams();
-
     const navigate = useNavigate();
 
-    console.log(data)
     useEffect(()=> {
-
         const parsedArr = JSON.parse(localStorage.getItem("information"));
-        setExistArr(parsedArr);
+        setcontactList(parsedArr);
         const filtered = parsedArr.filter(fd=> fd.id === id);
         setData(filtered);
-
     },[refreshKey])
     
 
     const handleDelete = (id) => {
-       
-        const filtered = existArr.filter(entry => entry.id !== id);
+        const filtered = contactList.filter(entry => entry.id !== id);
         localStorage.setItem('information', JSON.stringify(filtered));
         navigate("/");
     }
@@ -39,21 +33,16 @@ const Details = () => {
     }
 
     const handleSubmit = (e) => {
-
         let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
         let regexName = /^[A-Z][-a-zA-Z]+$/;
-
-       
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
-        const contact = form.contact.value;
+        const contact = form.contact.value;  
+        if(regexPhone.test(contact) && regexName.test(name)) {
         
-        if(regexPhone.test(contact) && regexName.test(name))
-        {
-        handleUpdate(name,contact);
-
-        setRefreshKey(oldKey=> oldKey+ 1)
+            handleUpdate(name,contact);
+            setRefreshKey(oldKey=> oldKey+ 1)
         }
         else {
             let message = "Phone number or User Name is not valid";
@@ -61,13 +50,11 @@ const Details = () => {
         }
     }
 
-    const handleUpdate = (name,contact) => {
-         
-        const filtered = existArr.findIndex(obj=> obj.id === id);
-        existArr[filtered].name = name;
-        existArr[filtered].contact = contact;
-        
-        localStorage.setItem('information',JSON.stringify(existArr));
+    const handleUpdate = (name,contact) => { 
+        const filtered = contactList.findIndex(obj=> obj.id === id);
+        contactList[filtered].name = name;
+        contactList[filtered].contact = contact;   
+        localStorage.setItem('information',JSON.stringify(contactList));
     }
    
     return (
