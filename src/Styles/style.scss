@@ -17,6 +17,11 @@
 	color: black;
 	text-align: left;
 }
+
+.form-control label {
+  padding-left: 5px;
+}
+
 .form-wrapper {
 	width: 50%;
 	margin: auto;
@@ -35,7 +40,7 @@
 }
 .form-button {
 	padding: 10px 20px;
-	border-radius: 20px;
+	border-radius: 5px;
 	border: none;
 	cursor: pointer;
 	background-color: black;
