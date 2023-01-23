@@ -22,20 +22,25 @@ const Home = () => {
     let regexName = /^[A-Z][a-z ]{3,19}$/;
     
     const handleSubmit = (e) => {
+
+        setNameError("");
+        setPhoneError("");
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
         // execute rest of the function upon matching phone number
-        if(!regexName.test(name)) {
-            let message = "Name is not valid";
-            setNameError(message);      
-        }
+        
         if(!regexPhone.test(contact)) {
             let message = "Phone number is not valid"
             setPhoneError(message);
         }
-        else  {
+        if(!regexName.test(name)){
+            let message = "Name is not valid"
+            setNameError(message);
+            return;
+        }
+        
             const person = {
                 id: uuidv4(),
                 name,
@@ -53,14 +58,12 @@ const Home = () => {
                 existData.push(person);
                 localStorage.setItem('information', JSON.stringify(existData));
             }           
-        }
+        
 
         setRefreshKey(oldKey=> oldKey + 1);
 
         // clear the value of input field and error messages when user submit correct info
-        form.reset();
-        setNameError("");
-        setPhoneError("");
+        
     }
     
     return (

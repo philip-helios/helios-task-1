@@ -13,6 +13,10 @@ const Details = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    // regex value for validating phone and contact
+    let regexName = /^[A-Z][a-z ]{3,19}$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
         setcontactList(parsedArr);
@@ -34,32 +38,30 @@ const Details = () => {
     }
 
     const handleSubmit = (e) => {
+
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-       
-        let regexName = /^[A-Z][a-z ]{3,19}$/;
-        let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-
-        if(!regexName.test(name)) {
-            let message = "Name is not valid";
-            setNameError(message);
+        
+        const testName = regexName.test(name);
+        const testPhone = regexPhone.test(contact);
+        
+        if(testName === false ){
+            setNameError("Name is not valid")
         }
-        if(!regexPhone.test(contact)) {
-            let message = "Phone number is not valid";
-            setPhoneError(message);
+        if(testPhone === false) {
+            setPhoneError("Phone number is not valid")
         }
-        else {
-
-            handleUpdate(name,contact);
-            setRefreshKey(oldKey=> oldKey+ 1)     
+        
+        if(testName && testPhone === true){
+            handleUpdate(name,contact); 
+            form.reset(""); 
+            setRefreshKey(oldKey=> oldKey+ 1)
             // clear the value of input field and error messages when user submit correct info
-            form.reset();
             setNameError("");
             setPhoneError("");
-        }    
-        
+        }             
     }
 
     const handleUpdate = (name,contact) => { 
