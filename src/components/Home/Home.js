@@ -19,7 +19,7 @@ const Home = () => {
     
     // submit new entry after validating phone number
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    let regexName = /^[A-Z][a-z ]{3,19}$/;
+    let regexName = /^(?![\s.]+$)[a-zA-Z\s.]*$/;
     
     const handleSubmit = (e) => {
 
@@ -59,7 +59,6 @@ const Home = () => {
                 existData.push(person);
                 localStorage.setItem('information', JSON.stringify(existData));
             }           
-        
 
         setRefreshKey(oldKey=> oldKey + 1);
         }   
