@@ -7,6 +7,7 @@ import '../../Styles/style.css'
 const Details = () => {
 
     const [data, setData] = useState([]);
+    const [error, setError] = useState([]);
     const [existArr, setExistArr] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
     const { id } = useParams();
@@ -39,14 +40,25 @@ const Details = () => {
 
     const handleSubmit = (e) => {
 
+        let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+        let regexName = /^[A-Z][-a-zA-Z]+$/;
+
+       
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
         
+        if(regexPhone.test(contact) && regexName.test(name))
+        {
         handleUpdate(name,contact);
 
         setRefreshKey(oldKey=> oldKey+ 1)
+        }
+        else {
+            let message = "Phone number or User Name is not valid";
+            setError(message);
+        }
     }
 
     const handleUpdate = (name,contact) => {
@@ -119,9 +131,9 @@ const Details = () => {
                             <div className='form-control'> 
                                 <label htmlFor ="contact">Contact</label>
                                 <input type = "text" name="contact" defaultValue={rc.contact}/>
-                                <p className='text-error'></p>
+                                <p className='text-error'>{error}</p>
                             </div>
-                            <div>
+                            <div> 
                             <input  className="form-button"
                                 type="submit"
                                 value="Submit"/>

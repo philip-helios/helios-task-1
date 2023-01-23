@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Styles/responsive.css'
 import '../../Styles/style.css'
@@ -62,7 +62,7 @@ const Home = () => {
                       
         }
 
-        // show erro message if phone number doesn't match with regex 
+        // show error message if phone number doesn't match with regex 
         else {
             let message = "Phone number or User Name is not valid";
             setError(message);

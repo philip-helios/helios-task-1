@@ -43,6 +43,11 @@
     color: white;
 }
 
+.text-error {
+
+  color: red;
+}
+
 /*style for table*/
 
 .table {
