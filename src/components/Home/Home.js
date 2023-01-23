@@ -29,18 +29,19 @@ const Home = () => {
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-        // execute rest of the function upon matching phone number
         
-        if(!regexPhone.test(contact)) {
-            let message = "Phone number is not valid"
-            setPhoneError(message);
-        }
-        if(!regexName.test(name)){
-            let message = "Name is not valid"
-            setNameError(message);
-            return;
-        }
+        // execute rest of the function upon matching phone number and name validation 
+        const testName = regexName.test(name);
+        const testPhone = regexPhone.test(contact);
         
+        if(testName === false ){
+            setNameError("Name is not valid")
+        }
+        if(testPhone === false) {
+            setPhoneError("Phone number is not valid")
+        }
+
+        if(testName && testPhone === true){
             const person = {
                 id: uuidv4(),
                 name,
@@ -61,9 +62,7 @@ const Home = () => {
         
 
         setRefreshKey(oldKey=> oldKey + 1);
-
-        // clear the value of input field and error messages when user submit correct info
-        
+        }   
     }
     
     return (
