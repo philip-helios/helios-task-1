@@ -14,7 +14,7 @@ const Details = () => {
     const navigate = useNavigate();
 
     // regex value for validating phone and contact
-    let regexName = /^(?![\s.]+$)[a-zA-Z\s.]*$/;
+    let regexName = /^[A-Z]+[A-Z a-z]*$/;
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
     useEffect(()=> {
