@@ -103,22 +103,6 @@ const Details = () => {
                     )
                 }         
             </div>
-            {/* <div className="tr">
-                <div className='dt-table-th'>Name</div>
-                <div className='dt-table-th'>Contact</div>
-                <div className='dt-table-th'>Edit</div>
-                <div className='dt-table-th'>Delete</div>
-            </div>           */}
-            {/* { 
-              data.map(rc=>
-                <div className="tr" key={rc.id}>
-                    <div className='dt-table-td'>{rc.name}</div>
-                    <div className='dt-table-td'>{rc.contact}</div>
-                    <div className='dt-table-td'><button onClick={handleEdit} className='btn green'>Edit</button></div>                    
-                    <div className='dt-table-td'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>                       
-                </div> 
-                )          
-            } */}
             {
                 data.map(rc=>
                     <form key={rc.id} onSubmit={handleSubmit} className='contact-form d-none' id="editForm">

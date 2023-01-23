@@ -118,25 +118,6 @@ const Home = () => {
                     )
                 }         
             </div>
-            {/* <div className='contact-table table'>
-                <h2>Record Book</h2>
-                <div className='table-body'>
-                <div className="tr">
-                    <div className='th'>Name</div>
-                    <div className='th'>Contact</div>
-                    <div className='th'>Details</div>
-                </div> 
-                    {
-                        data?.map((data,i)=>
-                        <div className="tr" key={i}>
-                            <div className='td'>{data.name}</div>
-                            <div className='td'>{data.contact}</div>
-                            <div className='td'></div>                                         
-                        </div>
-                        )
-                    }   
-                </div>      
-            </div> */}
         </div>
     );
 };
