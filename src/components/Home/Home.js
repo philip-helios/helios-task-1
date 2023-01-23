@@ -18,8 +18,8 @@ const Home = () => {
     },[refreskKey])
     
     // submit new entry after validating phone number
+    let regexName = /^[A-Z]+[A-Z a-z]*$/;
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
-    let regexName = /^(?![\s.]+$)[a-zA-Z\s.]*$/;
     
     const handleSubmit = (e) => {
 
@@ -71,7 +71,7 @@ const Home = () => {
                     <h2>Sample Contact Form</h2>
                     <div className='form-control'>
                         <label htmlFor ="name">Name</label>
-                        <input type ="text" name="name" required/>
+                        <input type ="text" name="name" minlength="3" required/>
                         <p className='text-error'>{nameError}</p>
                     </div>
                     <div className='form-control'> 
