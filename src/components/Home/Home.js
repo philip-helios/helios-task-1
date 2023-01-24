@@ -76,26 +76,26 @@ const Home = () => {
                 <p className='text-error'>{phoneError}</p>
                 <input className='submit-button' type="submit" value="Submit"/>        
             </form>
-            <div class="table" id="results">
-                <div class='theader'>
-                    <div class='table_header'>Name</div>
-                    <div class='table_header'>Contact</div>
-                    <div class='table_header'>Details</div>
+            <div className="table" id="results">
+                <div className='theader'>
+                    <div className='table_header'>Name</div>
+                    <div className='table_header'>Contact</div>
+                    <div className='table_header'>Details</div>
                 </div>
                 {   
                     data?.map((dt,i)=>
-                    <div class='table_row' key = {dt.id}>
-                        <div class='table_small'>
-                        <div class='table_cell th-sm-bg'>Name</div>
-                        <div class='table_cell'>{dt.name}</div>
+                    <div className='table_row' key = {dt.id}>
+                        <div className='table_small'>
+                        <div className='table_cell th-sm-bg'>Name</div>
+                        <div className='table_cell'>{dt.name}</div>
                         </div>
-                        <div class='table_small'>
-                        <div class='table_cell th-sm-bg'>Contact</div>
-                        <div class='table_cell'>{dt.contact}</div>
+                        <div className='table_small'>
+                        <div className='table_cell th-sm-bg'>Contact</div>
+                        <div className='table_cell'>{dt.contact}</div>
                         </div>
-                        <div class='table_small'>
-                        <div class='table_cell th-sm-bg'>Details</div>
-                        <div class='table_cell'><Link to={`contact/${dt.id}`}><button className='btn btn-details'>Details</button></Link></div>
+                        <div className='table_small'>
+                        <div className='table_cell th-sm-bg'>Details</div>
+                        <div className='table_cell'><Link to={`contact/${dt.id}`}><button className='btn btn-details'>Details</button></Link></div>
                         </div>           
                     </div>
                     )
