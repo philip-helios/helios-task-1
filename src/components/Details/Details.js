@@ -34,7 +34,6 @@ const Details = () => {
     const handleEdit = () => {
         const form = document.getElementById("editForm");
         form.classList.remove("d-none");
-        console.log("clicked")
     }
 
     const handleSubmit = (e) => {
@@ -74,31 +73,31 @@ const Details = () => {
     return (
         <div className='details-table table'>
             <h2>Record Book</h2>
-            <div class="table" id="results">
-                <div class='theader'>
-                    <div class='table_header'>Name</div>
-                    <div class='table_header'>Contact</div>
-                    <div class='table_header'>Edit</div>
-                    <div class='table_header'>Delete</div>
+            <div className="table" id="results">
+                <div className='theader'>
+                    <div className='table_header'>Name</div>
+                    <div className='table_header'>Contact</div>
+                    <div className='table_header'>Edit</div>
+                    <div className='table_header'>Delete</div>
                 </div>
                 {   
                     data?.map((dt,i)=>
-                    <div class='table_row' key = {dt.id}>
-                        <div class='table_small'>
-                            <div class='table_cell th-sm-bg'>Name</div>
-                            <div class='table_cell'>{dt.name}</div>
+                    <div className='table_row' key = {dt.id}>
+                        <div className='table_small'>
+                            <div className='table_cell th-sm-bg'>Name</div>
+                            <div className='table_cell'>{dt.name}</div>
                         </div>
-                        <div class='table_small'>
-                            <div class='table_cell th-sm-bg'>Contact</div>
-                            <div class='table_cell'>{dt.contact}</div>
+                        <div className='table_small'>
+                            <div className='table_cell th-sm-bg'>Contact</div>
+                            <div className='table_cell'>{dt.contact}</div>
                         </div>
-                        <div class='table_small'>
-                            <div class='table_cell th-sm-bg'>Edit</div>
-                            <div class='table_cell'><button onClick={handleEdit} className='btn green'>Edit</button></div>
+                        <div className='table_small'>
+                            <div className='table_cell th-sm-bg'>Edit</div>
+                            <div className='table_cell'><button onClick={handleEdit} className='btn green'>Edit</button></div>
                         </div> 
-                        <div class='table_small'>
-                            <div class='table_cell th-sm-bg'>Delete</div>
-                            <div class='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>
+                        <div className='table_small'>
+                            <div className='table_cell th-sm-bg'>Delete</div>
+                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>
                         </div>          
                     </div>
                     )
