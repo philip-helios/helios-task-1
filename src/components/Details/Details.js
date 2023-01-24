@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../Styles/style.scss'
+import Form from '../Utils/Form/FormDeafult';
 
 
 const Details = () => {
@@ -15,7 +16,7 @@ const Details = () => {
 
     // regex value for validating phone and contact
     let regexName = /^[A-Z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
 
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
@@ -106,20 +107,12 @@ const Details = () => {
             {
                 data.map(rc=>
                     <form key={rc.id} onSubmit={handleSubmit} className='form-container d-none' id="editForm">
-                        <h2 className='text-center'>Edit Information</h2> 
-                        <div className="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" defaultValue={rc.name}/><br/>
-                            <p className='text-error'>{nameError}</p>
-                        </div>
-                        <div className="form-group">
-                            <label>Phone</label>
-                            <input type="text" name="contact" defaultValue={rc.contact}/><br/>
-                            <p className='text-error'>{phoneError}</p>
-                        </div>
-                        <div className="form-group">
-                            <input className='submit-button' type="submit" value="Submit"/>  
-                        </div>
+                        <Form 
+                            name={rc.name}
+                            contact={rc.contact}
+                            nameError={nameError}
+                            phoneError={phoneError}
+                        ></Form>
                     </form>
                     )
             }                               

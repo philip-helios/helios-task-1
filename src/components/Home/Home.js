@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../Styles/style.scss'
 import { v4 as uuidv4 } from 'uuid';
+import FormDefault from '../Utils/Form/FormDeafult';
 
 
 const Home = () => {
@@ -19,7 +20,7 @@ const Home = () => {
     
     // submit new entry after validating phone number
     let regexName = /^[A-Z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
     
     const handleSubmit = (e) => {
 
@@ -65,17 +66,14 @@ const Home = () => {
     }
     
     return (
-        <div className='wrapper-main'>
+        <div className='wrapper-main'>      
             <form onSubmit={handleSubmit} className='form-container'>
-                <h2 className='text-center'>Add Record</h2>
-                <label>Name</label>
-                <input type="text" name="name"/><br />
-                <p className='text-error'>{nameError}</p>
-                <label>Phone</label>
-                <input type="text" name="contact"/><br />
-                <p className='text-error'>{phoneError}</p>
-                <input className='submit-button' type="submit" value="Submit"/>        
-            </form>
+                <FormDefault 
+                    nameError={nameError}
+                    phoneError={phoneError}
+                >
+                </FormDefault>      
+            </form> 
             <div className="table" id="results">
                 <div className='theader'>
                     <div className='table_header'>Name</div>
