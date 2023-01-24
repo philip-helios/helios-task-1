@@ -109,12 +109,12 @@ const Details = () => {
                         <h2 className='text-center'>Edit Information</h2> 
                         <div className="form-group">
                             <label>Name</label>
-                            <input type="text" name="name"/><br/>
+                            <input type="text" name="name" defaultValue={rc.name}/><br/>
                             <p className='text-error'>{nameError}</p>
                         </div>
                         <div className="form-group">
                             <label>Phone</label>
-                            <input type="text" name="contact"/><br/>
+                            <input type="text" name="contact" defaultValue={rc.contact}/><br/>
                             <p className='text-error'>{phoneError}</p>
                         </div>
                         <div className="form-group">

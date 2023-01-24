@@ -1,7 +1,7 @@
 /*style for contact form*/
-/*style for table*/
-/* style for button */
-/*details table style*/
+
+
+
 .wrapper-main {
 	min-height: 100vh;
 	width: 90%;
@@ -47,6 +47,10 @@
 .text-error {
 	color: red;
 }
+
+
+/*style for table*/
+
 .table {
 	display: table;
 	text-align: center;
@@ -91,6 +95,9 @@
 	border-right: rgb(82, 78, 78) 1px solid;
 	border-left: rgb(82, 78, 78) 1px solid;
 }
+
+/* style for button */
+
 .btn {
 	font-size: inherit;
 	padding: 5px 7px;
@@ -108,20 +115,7 @@
 .green {
 	background-color: green;
 }
-.dt-table-th {
-	width: 25%;
-	text-align: center;
-	padding: 8px;
-	border: 1px solid grey;
-	border-style: inset;
-}
-.dt-table-td {
-	width: 25%;
-	text-align: center;
-	padding: 8px;
-	border: 1px solid grey;
-	border-style: inset;
-}
+
 .d-none {
 	display: none;
 }
