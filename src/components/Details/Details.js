@@ -106,24 +106,20 @@ const Details = () => {
             </div>
             {
                 data.map(rc=>
-                    <form key={rc.id} onSubmit={handleSubmit} className='contact-form d-none' id="editForm">
-                        <h2>Edit Information</h2> 
-                        <div className='form-wrapper'>
-                            <div className='form-control'>
-                                <label htmlFor ="name">Name</label>
-                                <input type ="text" name="name" minlength="3" defaultValue={rc.name}/>
-                                <p className='text-error'>{nameError}</p>
-                            </div>
-                            <div className='form-control'> 
-                                <label htmlFor ="contact">Contact</label>
-                                <input type = "text" name="contact" defaultValue={rc.contact}/>
-                                <p className='text-error'>{phoneError}</p>
-                            </div>
-                            <div> 
-                            <input  className="form-button"
-                                type="submit"
-                                value="Submit"/>
-                            </div>
+                    <form key={rc.id} onSubmit={handleSubmit} className='form-container d-none' id="editForm">
+                        <h2 className='text-center'>Edit Information</h2> 
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name"/><br/>
+                            <p className='text-error'>{nameError}</p>
+                        </div>
+                        <div className="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="contact"/><br/>
+                            <p className='text-error'>{phoneError}</p>
+                        </div>
+                        <div className="form-group">
+                            <input className='submit-button' type="submit" value="Submit"/>  
                         </div>
                     </form>
                     )

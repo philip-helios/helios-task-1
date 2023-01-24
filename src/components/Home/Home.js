@@ -66,25 +66,15 @@ const Home = () => {
     
     return (
         <div className='wrapper-main'>
-            <form onSubmit={handleSubmit} className='contact-form'> 
-                <div className='form-wrapper'>
-                    <h2>Sample Contact Form</h2>
-                    <div className='form-control'>
-                        <label htmlFor ="name">Name</label>
-                        <input type ="text" name="name" minlength="3" required/>
-                        <p className='text-error'>{nameError}</p>
-                    </div>
-                    <div className='form-control'> 
-                        <label htmlFor ="contact">Contact</label>
-                        <input type = "text" name="contact" required/>
-                        <p className='text-error'>{phoneError}</p>
-                    </div>
-                    <div>
-                    <input className="form-button"
-                        type="submit"
-                        value="Submit"/>
-                    </div>
-                </div>
+            <form onSubmit={handleSubmit} className='form-container'>
+                <h2 className='text-center'>Add Record</h2>
+                <label>Name</label>
+                <input type="text" name="name"/><br />
+                <p className='text-error'>{nameError}</p>
+                <label>Phone</label>
+                <input type="text" name="contact"/><br />
+                <p className='text-error'>{phoneError}</p>
+                <input className='submit-button' type="submit" value="Submit"/>        
             </form>
             <div class="table" id="results">
                 <div class='theader'>
