@@ -67,19 +67,14 @@ const Home = () => {
     return (
         <div className='wrapper-main'>
             <form onSubmit={handleSubmit} className='form-container'>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input type="text" name="name"/><br />
-                    <p className='text-error'>{nameError}</p>
-                </div>
-                <div className="form-group">
-                    <label>Phone</label>
-                    <input type="text" name="contact"/><br />
-                    <p className='text-error'>{phoneError}</p>
-                </div>
-                <div className="form-group">
-                    <input className='submit-button' type="submit" value="Submit"/>  
-                </div>
+                <h2 className='text-center'>Add Record</h2>
+                <label>Name</label>
+                <input type="text" name="name"/><br />
+                <p className='text-error'>{nameError}</p>
+                <label>Phone</label>
+                <input type="text" name="contact"/><br />
+                <p className='text-error'>{phoneError}</p>
+                <input className='submit-button' type="submit" value="Submit"/>        
             </form>
             <div class="table" id="results">
                 <div class='theader'>
