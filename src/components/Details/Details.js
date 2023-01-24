@@ -111,7 +111,7 @@ const Details = () => {
                         <div className='form-wrapper'>
                             <div className='form-control'>
                                 <label htmlFor ="name">Name</label>
-                                <input type ="text" name="name" defaultValue={rc.name}/>
+                                <input type ="text" name="name" minlength="3" defaultValue={rc.name}/>
                                 <p className='text-error'>{nameError}</p>
                             </div>
                             <div className='form-control'> 
