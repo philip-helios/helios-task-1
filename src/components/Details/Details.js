@@ -94,11 +94,11 @@ const Details = () => {
                         </div>
                         <div className='table_small'>
                             <div className='table_cell th-sm-bg'>Edit</div>
-                            <div className='table_cell'><button onClick={handleEdit} className='btn green'>Edit</button></div>
+                            <div className='table_cell'><button onClick={handleEdit} className='btn dlt-btn'>Edit</button></div>
                         </div> 
                         <div className='table_small'>
                             <div className='table_cell th-sm-bg'>Delete</div>
-                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn red'>Delete</button></div>
+                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn edt-btn'>Delete</button></div>
                         </div>          
                     </div>
                     )
