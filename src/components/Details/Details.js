@@ -11,11 +11,11 @@ const Details = () => {
     const [phoneError, setPhoneError] = useState([]);
     const [contactList, setcontactList] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
-    const { id } = useParams();
+    const { id } = useParams();#343a40
     const navigate = useNavigate();
 
     // regex value for validating phone and contact
-    let regexName = /^[a-z a-z]*$/;
+    let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
 
     useEffect(()=> {
