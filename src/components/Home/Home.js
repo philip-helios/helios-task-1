@@ -73,7 +73,8 @@ const Home = () => {
                     phoneError={phoneError}
                 >
                 </FormDefault>      
-            </form> 
+            </form>
+            <h2 className='text-center'>Contact List</h2> 
             <div className="table" id="results">
                 <div className='theader'>
                     <div className='table_header'>Name</div>

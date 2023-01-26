@@ -1,6 +1,13 @@
+/* default color */
+
+$color-red: #d62d3e;
+$color-green: #22a140;
+$color-blue: #196fca;
+$color-dark: #15171a;
+
 /*style for contact form*/
 .wrapper-main {
-	min-height: 100vh;
+	min-height: 70vh;
 	width: 90%;
 	display: flex;
 	flex-direction: column;
@@ -23,25 +30,29 @@
 		padding: 10px 15px;
 		margin: 10px 0px;
 		font-size: 16px;
-		border: 3px solid #555;
+		border: 1px solid transparent;
 		border-radius: 5px;
 		box-sizing: border-box;
-	}
-	input[type=text]:focus{
-		outline: 3px solid lightblue;
-		border: none;
+		&:focus{
+			outline: 3px solid lightblue;
+			border: none;
+		}
 	}
 	label {
 		font-size: 16px;
 	}
 	.submit-button {
 		width:auto;
-		background-color: black;
+		background-color: $color-dark;
 		border: none;
 		color: white;
 		border-radius: 5px;
 		padding: 10px 20px;
 		font-size: 16px;
+		cursor: pointer;
+		&:hover {
+			background-color: rgba($color-dark,0.80);
+		}
 	}
 }
 
@@ -49,7 +60,7 @@
 	text-align: center;
 }
 .text-error {
-	color: red;
+	color: $color-red;
 }
 
 
@@ -59,7 +70,7 @@
 	display: table;
 	text-align: center;
 	width: 80%;
-	margin: 5% auto 0;
+	margin: 30px auto 0;
 	border-collapse: separate;
 	font-weight: 400;
 	margin-bottom: 20px;
@@ -87,7 +98,7 @@
 .table_header {
 	display: table-cell;
 	border: rgb(82, 78, 78) 1px solid;
-	background-color: black;
+	background-color: $color-dark;
 	color: white;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -108,16 +119,26 @@
 	border-radius: 5px;
 	color: white;
 	border: none;
+	cursor: pointer;
 }
 .btn-details {
 	text-decoration: none;
-	background-color: #218bff;
+	background-color: $color-blue;
+	&:hover{
+		background-color: rgba($color-blue,0.75);
+	}
 }
-.red {
-	background-color: red;
+.dlt-btn {
+	background-color: $color-red;
+	&:hover{
+		background-color: rgba($color-red,0.75);
+	} 
 }
-.green {
-	background-color: green;
+.edt-btn {
+	background-color: $color-green;
+	&:hover{
+		background-color: rgba($color-green,0.90);
+	}
 }
 
 .d-none {
@@ -155,7 +176,7 @@
 		display: none;
 	}
 	.th-sm-bg {
-		background-color: black;
+		background-color: $color-dark;
 		color: white;
 	}
 	.table_cell {
