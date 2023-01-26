@@ -11,7 +11,7 @@ const Details = () => {
     const [phoneError, setPhoneError] = useState([]);
     const [contactList, setcontactList] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
-    const { id } = useParams();
+    const { id } = useParams();#343a40
     const navigate = useNavigate();
 
     // regex value for validating phone and contact
