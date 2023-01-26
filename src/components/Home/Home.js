@@ -19,7 +19,7 @@ const Home = () => {
     },[refreskKey])
     
     // submit new entry after validating phone number
-    let regexName = /^[A-Z]+[A-Z a-z]*$/;
+    let regexName = /^[a-z a-z]*$/;
     let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
     
     const handleSubmit = (e) => {
