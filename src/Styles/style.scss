@@ -17,7 +17,7 @@
   }
 
 .form-container {
-	input {
+	input[type=text]{
 		width: 100%;
 		clear: both;
 		padding: 10px 15px;
@@ -27,11 +27,12 @@
 		border-radius: 5px;
 		box-sizing: border-box;
 	}
-	
+	input[type=text]:focus{
+		outline: 3px solid lightblue;
+		border: none;
+	}
 	label {
 		font-size: 16px;
-		
-
 	}
 	.submit-button {
 		width:auto;
@@ -39,6 +40,8 @@
 		border: none;
 		color: white;
 		border-radius: 5px;
+		padding: 10px 20px;
+		font-size: 16px;
 	}
 }
 
