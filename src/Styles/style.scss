@@ -150,6 +150,9 @@ $color-dark: #15171a;
 	}
 }
 @media screen and (max-width: 650px) {
+	.form-container {
+		width: 90%;
+	}
 	.table {
 		display: block;
 	}

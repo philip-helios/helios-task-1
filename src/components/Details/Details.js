@@ -16,7 +16,7 @@ const Details = () => {
 
     // regex value for validating phone and contact
     let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
 
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
