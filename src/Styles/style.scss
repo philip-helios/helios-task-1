@@ -1,7 +1,4 @@
 /*style for contact form*/
-
-
-
 .wrapper-main {
 	min-height: 100vh;
 	width: 90%;
@@ -25,10 +22,14 @@
 		clear: both;
 		padding: 10px 15px;
 		margin: 10px 0px;
+		font-size: 16px;
+		border: 3px solid #555;
+		border-radius: 5px;
+		box-sizing: border-box;
 	}
 	
 	label {
-		font-size: 14px;
+		font-size: 16px;
 		
 
 	}
