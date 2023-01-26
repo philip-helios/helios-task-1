@@ -161,6 +161,7 @@
 	.table_cell {
 		display: table-cell;
 		width: 50%;
+		border: 1px solid #f8f8f8;;
 		&:nth-child(even) {
 			background-color: #e9e9e9;
 		}
