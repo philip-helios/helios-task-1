@@ -20,10 +20,9 @@ const Home = () => {
     
     // submit new entry after validating phone number
     let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
     
     const handleSubmit = (e) => {
-
         setNameError("");
         setPhoneError("");
         e.preventDefault();
@@ -41,7 +40,6 @@ const Home = () => {
         if(testPhone === false) {
             setPhoneError("Phone number is not valid")
         }
-
         if(testName && testPhone === true){
             const person = {
                 id: uuidv4(),
@@ -60,7 +58,6 @@ const Home = () => {
                 existData.push(person);
                 localStorage.setItem('information', JSON.stringify(existData));
             }           
-
         setRefreshKey(oldKey=> oldKey + 1);
         }   
     }
