@@ -16,7 +16,7 @@ const Details = () => {
 
     // regex value for validating phone and contact
     let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})|(01[3-9]\d{8})$/;
+    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
 
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
@@ -25,7 +25,6 @@ const Details = () => {
         setData(filtered);
     },[refreshKey])
     
-
     const handleDelete = (id) => {
         const filtered = contactList.filter(entry => entry.id !== id);
         localStorage.setItem('information', JSON.stringify(filtered));
@@ -38,22 +37,18 @@ const Details = () => {
     }
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-        
         const testName = regexName.test(name);
         const testPhone = regexPhone.test(contact);
-        
         if(testName === false ){
             setNameError("Name is not valid")
         }
         if(testPhone === false) {
             setPhoneError("Phone number is not valid")
-        }
-        
+        }  
         if(testName && testPhone === true){
             handleUpdate(name,contact); 
             form.reset(""); 
@@ -94,11 +89,11 @@ const Details = () => {
                         </div>
                         <div className='table_small'>
                             <div className='table_cell th-sm-bg'>Edit</div>
-                            <div className='table_cell'><button onClick={handleEdit} className='btn dlt-btn'>Edit</button></div>
+                            <div className='table_cell'><button onClick={handleEdit} className='btn edt-btn'>Edit</button></div>
                         </div> 
                         <div className='table_small'>
                             <div className='table_cell th-sm-bg'>Delete</div>
-                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn edt-btn'>Delete</button></div>
+                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn dlt-btn'>Delete</button></div>
                         </div>          
                     </div>
                     )
