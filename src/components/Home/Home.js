@@ -20,7 +20,7 @@ const Home = () => {
     
     // submit new entry after validating phone number
     let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
     
     const handleSubmit = (e) => {
         setNameError("");
