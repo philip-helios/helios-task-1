@@ -5,11 +5,7 @@ import Form from '../Utils/Form/FormDeafult';
 
 
 const Details = () => {
-
     const [data, setData] = useState([]);
-    const [nameError, setNameError] = useState([]);
-    const [phoneError, setPhoneError] = useState([]);
-    const [contactList, setcontactList] = useState([]);
     const [refreshKey,setRefreshKey] = useState(0);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -20,13 +16,13 @@ const Details = () => {
 
     useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
-        setcontactList(parsedArr);
         const filtered = parsedArr.filter(fd=> fd.id === id);
         setData(filtered);
-    },[refreshKey])
+    },[id,refreshKey])
     
     const handleDelete = (id) => {
-        const filtered = contactList.filter(entry => entry.id !== id);
+        const records = JSON.parse(localStorage.getItem("information"))
+        const filtered = records.filter(fd=> fd.id !==id);
         localStorage.setItem('information', JSON.stringify(filtered));
         navigate("/");
     }
@@ -41,29 +37,19 @@ const Details = () => {
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-        const testName = regexName.test(name);
-        const testPhone = regexPhone.test(contact);
-        if(testName === false ){
-            setNameError("Name is not valid")
-        }
-        if(testPhone === false) {
-            setPhoneError("Phone number is not valid")
-        }  
-        if(testName && testPhone === true){
+        if(regexName.test(name) && regexPhone.test(contact)){
             handleUpdate(name,contact); 
             form.reset(""); 
             setRefreshKey(oldKey=> oldKey+ 1)
-            // clear the value of input field and error messages when user submit correct info
-            setNameError("");
-            setPhoneError("");
         }             
     }
 
-    const handleUpdate = (name,contact) => { 
-        const filtered = contactList.findIndex(obj=> obj.id === id);
-        contactList[filtered].name = name;
-        contactList[filtered].contact = contact;   
-        localStorage.setItem('information',JSON.stringify(contactList));
+    const handleUpdate = (name,contact) => {
+        const records = JSON.parse(localStorage.getItem("information"));
+        const filtered = records.findIndex(fd => fd.id === id); 
+        records[filtered].name=name;
+        records[filtered].contact=contact;
+        localStorage.setItem('information',JSON.stringify(records));
     }
    
     return (
@@ -103,10 +89,8 @@ const Details = () => {
                 data.map(rc=>
                     <form key={rc.id} onSubmit={handleSubmit} className='form-container d-none' id="editForm">
                         <Form 
-                            name={rc.name}
-                            contact={rc.contact}
-                            nameError={nameError}
-                            phoneError={phoneError}
+                            defaultName={rc.name}
+                            defaultContact={rc.contact}
                         ></Form>
                     </form>
                     )

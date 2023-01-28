@@ -9,8 +9,7 @@ const Home = () => {
     
     const [data, setData] = useState([]);
     const [refreskKey,setRefreshKey] = useState(0);
-    const [nameError,setNameError] = useState([]);
-    const [phoneError,setPhoneError] = useState([]);
+    // const [phoneError,setPhoneError] = useState([]);
 
     // fetch data from local storage
     useEffect(()=> {
@@ -18,29 +17,28 @@ const Home = () => {
         setData(parsedArr);    
     },[refreskKey])
     
-    // submit new entry after validating phone number
     let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
     let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
-    
+
+    // const checkInput = () => {
+    //     let errorMsg={};
+    //     const name= document.getElementById("name").value;
+    //     const phone=document.getElementById("contact").value;
+    //     if(!regexName.test(name)){
+    //         errorMsg["name"]="Name is not valid"
+    //     }
+    //     if(!regexPhone.test(phone)){
+    //         errorMsg["phone"]="Phone is not valid"
+    //     }
+    //     setError(errorMsg);
+    // }
+
     const handleSubmit = (e) => {
-        setNameError("");
-        setPhoneError("");
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
-        const contact = form.contact.value;
-        
-        // execute rest of the function upon matching phone number and name validation 
-        const testName = regexName.test(name);
-        const testPhone = regexPhone.test(contact);
-        
-        if(testName === false ){
-            setNameError("Name is not valid")
-        }
-        if(testPhone === false) {
-            setPhoneError("Phone number is not valid")
-        }
-        if(testName && testPhone === true){
+        const contact = form.contact.value;   
+        if(regexName.test(name)&&regexPhone(contact)){
             const person = {
                 id: uuidv4(),
                 name,
@@ -65,9 +63,7 @@ const Home = () => {
     return (
         <div className='wrapper-main'>      
             <form onSubmit={handleSubmit} className='form-container'>
-                <FormDefault 
-                    nameError={nameError}
-                    phoneError={phoneError}
+                <FormDefault
                 >
                 </FormDefault>      
             </form>
