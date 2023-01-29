@@ -4,10 +4,8 @@ import '../../Styles/style.scss'
 import { v4 as uuidv4 } from 'uuid';
 import FormDefault from '../Utils/Form/FormDeafult';
 
-
 const Home = () => {  
     const [data, setData] = useState([]);
-
     // get data from local storage
     const getData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));    
