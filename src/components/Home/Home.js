@@ -5,40 +5,24 @@ import { v4 as uuidv4 } from 'uuid';
 import FormDefault from '../Utils/Form/FormDeafult';
 
 
-const Home = () => {
-    
+const Home = () => {  
     const [data, setData] = useState([]);
-    const [refreskKey,setRefreshKey] = useState(0);
-    // const [phoneError,setPhoneError] = useState([]);
 
-    // fetch data from local storage
-    useEffect(()=> {
+    // get data from local storage
+    const getData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));    
-        setData(parsedArr);    
-    },[refreskKey])
-    
-    let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
-
-    // const checkInput = () => {
-    //     let errorMsg={};
-    //     const name= document.getElementById("name").value;
-    //     const phone=document.getElementById("contact").value;
-    //     if(!regexName.test(name)){
-    //         errorMsg["name"]="Name is not valid"
-    //     }
-    //     if(!regexPhone.test(phone)){
-    //         errorMsg["phone"]="Phone is not valid"
-    //     }
-    //     setError(errorMsg);
-    // }
+        setData(parsedArr);  
+    }
+ 
+    useEffect(()=> {
+        getData();
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;   
-        if(regexName.test(name)&&regexPhone(contact)){
             const person = {
                 id: uuidv4(),
                 name,
@@ -54,9 +38,8 @@ const Home = () => {
             else {
                 const existData = JSON.parse(localStorage.getItem("information"));
                 existData.push(person);
-                localStorage.setItem('information', JSON.stringify(existData));
-            }           
-        setRefreshKey(oldKey=> oldKey + 1);
+                localStorage.setItem('information', JSON.stringify(existData));         
+                getData();
         }   
     }
     

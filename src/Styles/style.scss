@@ -53,6 +53,9 @@ $color-dark: #15171a;
 		&:hover {
 			background-color: rgba($color-dark,0.80);
 		}
+		&:disabled {
+			background-color: #cccccc;
+		}
 	}
 }
 

@@ -6,19 +6,19 @@ import Form from '../Utils/Form/FormDeafult';
 
 const Details = () => {
     const [data, setData] = useState([]);
-    const [refreshKey,setRefreshKey] = useState(0);
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // regex value for validating phone and contact
-    let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
-
-    useEffect(()=> {
+    // get data form local storage and filter by id
+    const getfilteredData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
         const filtered = parsedArr.filter(fd=> fd.id === id);
         setData(filtered);
-    },[id,refreshKey])
+    }
+
+    useEffect(()=> {
+      getfilteredData();
+    },[])
     
     const handleDelete = (id) => {
         const records = JSON.parse(localStorage.getItem("information"))
@@ -30,6 +30,7 @@ const Details = () => {
     const handleEdit = () => {
         const form = document.getElementById("editForm");
         form.classList.remove("d-none");
+        getfilteredData();
     }
 
     const handleSubmit = (e) => {
@@ -37,11 +38,8 @@ const Details = () => {
         const form = e.target;
         const name = form.name.value;
         const contact = form.contact.value;
-        if(regexName.test(name) && regexPhone.test(contact)){
-            handleUpdate(name,contact); 
-            form.reset(""); 
-            setRefreshKey(oldKey=> oldKey+ 1)
-        }             
+        handleUpdate(name,contact); 
+        form.reset("");     
     }
 
     const handleUpdate = (name,contact) => {
