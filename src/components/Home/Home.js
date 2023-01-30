@@ -1,50 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link} from 'react-router-dom';
 import '../../Styles/style.scss'
-import { v4 as uuidv4 } from 'uuid';
 import FormDefault from '../Utils/Form/FormDeafult';
+import useForm from '../Utils/Form/useForm';
+import useData from '../Utils/Form/useData';
 
 const Home = () => {  
-    const [data, setData] = useState([]);
-    // get data from local storage
-    const getData = () => {
-        const parsedArr = JSON.parse(localStorage.getItem("information"));    
-        setData(parsedArr);  
-    }
+    const {handleChange,error,handleAddRecord} = useForm();
+    // const [data,setData] = useState();
+    // //get data from local storage
+    // const getData = () => {
+    //     const parsedArr = JSON.parse(localStorage.getItem("information"));    
+    //     setData(parsedArr);  
+    // }
  
-    useEffect(()=> {
-        getData();
-    },[])
+    // useEffect(()=> {
+    //     getData();
+    // },[])
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const contact = form.contact.value;   
-            const person = {
-                id: uuidv4(),
-                name,
-                contact
-            }
-            // create a new array and push data as object in new array
-            if(!data){
-                let newData = [];
-                newData.push(person)
-                localStorage.setItem('information', JSON.stringify(newData));
-            }
-            // push data to existing array
-            else {
-                const existData = JSON.parse(localStorage.getItem("information"));
-                existData.push(person);
-                localStorage.setItem('information', JSON.stringify(existData));         
-                getData();
-        }   
-    }
+    const [data] = useData();
+
     
     return (
         <div className='wrapper-main'>      
-            <form onSubmit={handleSubmit} className='form-container'>
+            <form onSubmit={handleAddRecord} className='form-container'>
                 <FormDefault
+                 handleChange={handleChange}
+                 error={error}
                 >
                 </FormDefault>      
             </form>

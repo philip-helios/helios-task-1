@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../Styles/style.scss'
 import Form from '../Utils/Form/FormDeafult';
+import useForm from '../Utils/Form/useForm';
 
 
 const Details = () => {
-    const [data, setData] = useState([]);
+    const {handleChange,error,handleUpdate} = useForm();
+    const [data,setData] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
-
-    // get data form local storage and filter by id
+   
+    
     const getfilteredData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
         const filtered = parsedArr.filter(fd=> fd.id === id);
@@ -18,7 +20,7 @@ const Details = () => {
 
     useEffect(()=> {
       getfilteredData();
-    },[])
+    },[data])
     
     const handleDelete = (id) => {
         const records = JSON.parse(localStorage.getItem("information"))
@@ -30,24 +32,6 @@ const Details = () => {
     const handleEdit = () => {
         const form = document.getElementById("editForm");
         form.classList.remove("d-none");
-        getfilteredData();
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const contact = form.contact.value;
-        handleUpdate(name,contact); 
-        form.reset("");     
-    }
-
-    const handleUpdate = (name,contact) => {
-        const records = JSON.parse(localStorage.getItem("information"));
-        const filtered = records.findIndex(fd => fd.id === id); 
-        records[filtered].name=name;
-        records[filtered].contact=contact;
-        localStorage.setItem('information',JSON.stringify(records));
     }
    
     return (
@@ -85,8 +69,10 @@ const Details = () => {
             </div>
             {
                 data.map(rc=>
-                    <form key={rc.id} onSubmit={handleSubmit} className='form-container d-none' id="editForm">
-                        <Form 
+                    <form key={rc.id} onSubmit={(e)=>handleUpdate(id,e)} className='form-container d-none' id="editForm">
+                        <Form
+                            handleChange={handleChange}
+                            error={error}
                             defaultName={rc.name}
                             defaultContact={rc.contact}
                         ></Form>
