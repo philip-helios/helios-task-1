@@ -11,7 +11,6 @@ const Details = () => {
     const { id } = useParams();
     const navigate = useNavigate();
    
-    
     const getfilteredData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
         const filtered = parsedArr.filter(fd=> fd.id === id);
@@ -19,7 +18,7 @@ const Details = () => {
     }
 
     useEffect(()=> {
-      getfilteredData();
+        getfilteredData();
     },[data])
     
     const handleDelete = (id) => {

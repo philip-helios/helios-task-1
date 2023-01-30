@@ -9,7 +9,7 @@ const useData = () => {
  
     useEffect(()=> {
         getData();
-    },[])
+    },[data])
 
     return [data]
 };

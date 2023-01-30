@@ -7,20 +7,8 @@ import useData from '../Utils/Form/useData';
 
 const Home = () => {  
     const {handleChange,error,handleAddRecord} = useForm();
-    // const [data,setData] = useState();
-    // //get data from local storage
-    // const getData = () => {
-    //     const parsedArr = JSON.parse(localStorage.getItem("information"));    
-    //     setData(parsedArr);  
-    // }
- 
-    // useEffect(()=> {
-    //     getData();
-    // },[])
-
     const [data] = useData();
 
-    
     return (
         <div className='wrapper-main'>      
             <form onSubmit={handleAddRecord} className='form-container'>
