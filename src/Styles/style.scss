@@ -29,7 +29,7 @@ $color-dark: #15171a;
 		clear: both;
 		padding: 10px 15px;
 		margin: 10px 0px;
-		font-size: 16px;
+		font-size: 14px;
 		border: 1px solid transparent;
 		border-radius: 5px;
 		box-sizing: border-box;
@@ -52,6 +52,9 @@ $color-dark: #15171a;
 		cursor: pointer;
 		&:hover {
 			background-color: rgba($color-dark,0.80);
+		}
+		&:disabled {
+			background-color: #cccccc;
 		}
 	}
 }
@@ -192,6 +195,18 @@ $color-dark: #15171a;
 	}
 	.table_small {
 		display: table-row;
+	}
+}
+
+@media screen and (max-width:250px){
+	.table{
+		font-size: 13px;
+	}
+	.form-container{
+		input,label,.submit-button{
+			font-size: 13px;
+			padding: 8px 5px; 
+		}
 	}
 }
 

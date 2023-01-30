@@ -1,73 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link} from 'react-router-dom';
 import '../../Styles/style.scss'
-import { v4 as uuidv4 } from 'uuid';
 import FormDefault from '../Utils/Form/FormDeafult';
+import useForm from '../Utils/Form/useForm';
+import useData from '../Utils/Form/useData';
 
+const Home = () => {  
+    const {handleChange,error,handleAddRecord} = useForm();
+    const [data] = useData();
 
-const Home = () => {
-    
-    const [data, setData] = useState([]);
-    const [refreskKey,setRefreshKey] = useState(0);
-    const [nameError,setNameError] = useState([]);
-    const [phoneError,setPhoneError] = useState([]);
-
-    // fetch data from local storage
-    useEffect(()=> {
-        const parsedArr = JSON.parse(localStorage.getItem("information"));    
-        setData(parsedArr);    
-    },[refreskKey])
-    
-    // submit new entry after validating phone number
-    let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
-    
-    const handleSubmit = (e) => {
-        setNameError("");
-        setPhoneError("");
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const contact = form.contact.value;
-        
-        // execute rest of the function upon matching phone number and name validation 
-        const testName = regexName.test(name);
-        const testPhone = regexPhone.test(contact);
-        
-        if(testName === false ){
-            setNameError("Name is not valid")
-        }
-        if(testPhone === false) {
-            setPhoneError("Phone number is not valid")
-        }
-        if(testName && testPhone === true){
-            const person = {
-                id: uuidv4(),
-                name,
-                contact
-            }
-            // create a new array and push data as object in new array
-            if(!data){
-                let newData = [];
-                newData.push(person)
-                localStorage.setItem('information', JSON.stringify(newData));
-            }
-            // push data to existing array
-            else {
-                const existData = JSON.parse(localStorage.getItem("information"));
-                existData.push(person);
-                localStorage.setItem('information', JSON.stringify(existData));
-            }           
-        setRefreshKey(oldKey=> oldKey + 1);
-        }   
-    }
-    
     return (
         <div className='wrapper-main'>      
-            <form onSubmit={handleSubmit} className='form-container'>
-                <FormDefault 
-                    nameError={nameError}
-                    phoneError={phoneError}
+            <form onSubmit={handleAddRecord} className='form-container'>
+                <FormDefault
+                 handleChange={handleChange}
+                 error={error}
                 >
                 </FormDefault>      
             </form>

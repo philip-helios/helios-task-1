@@ -2,31 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../Styles/style.scss'
 import Form from '../Utils/Form/FormDeafult';
+import useForm from '../Utils/Form/useForm';
 
 
 const Details = () => {
-
-    const [data, setData] = useState([]);
-    const [nameError, setNameError] = useState([]);
-    const [phoneError, setPhoneError] = useState([]);
-    const [contactList, setcontactList] = useState([]);
-    const [refreshKey,setRefreshKey] = useState(0);
+    const {handleChange,error,handleUpdate} = useForm();
+    const [data,setData] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
-
-    // regex value for validating phone and contact
-    let regexName = /^[A-Za-z]+[A-Z a-z]*$/;
-    let regexPhone = /^(\+88|88)?(01[3-9]\d{8})$/;
-
-    useEffect(()=> {
+   
+    const getfilteredData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
-        setcontactList(parsedArr);
         const filtered = parsedArr.filter(fd=> fd.id === id);
         setData(filtered);
-    },[refreshKey])
+    }
+
+    useEffect(()=> {
+        getfilteredData();
+    },[data])
     
     const handleDelete = (id) => {
-        const filtered = contactList.filter(entry => entry.id !== id);
+        const records = JSON.parse(localStorage.getItem("information"))
+        const filtered = records.filter(fd=> fd.id !==id);
         localStorage.setItem('information', JSON.stringify(filtered));
         navigate("/");
     }
@@ -34,36 +31,6 @@ const Details = () => {
     const handleEdit = () => {
         const form = document.getElementById("editForm");
         form.classList.remove("d-none");
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const contact = form.contact.value;
-        const testName = regexName.test(name);
-        const testPhone = regexPhone.test(contact);
-        if(testName === false ){
-            setNameError("Name is not valid")
-        }
-        if(testPhone === false) {
-            setPhoneError("Phone number is not valid")
-        }  
-        if(testName && testPhone === true){
-            handleUpdate(name,contact); 
-            form.reset(""); 
-            setRefreshKey(oldKey=> oldKey+ 1)
-            // clear the value of input field and error messages when user submit correct info
-            setNameError("");
-            setPhoneError("");
-        }             
-    }
-
-    const handleUpdate = (name,contact) => { 
-        const filtered = contactList.findIndex(obj=> obj.id === id);
-        contactList[filtered].name = name;
-        contactList[filtered].contact = contact;   
-        localStorage.setItem('information',JSON.stringify(contactList));
     }
    
     return (
@@ -101,12 +68,12 @@ const Details = () => {
             </div>
             {
                 data.map(rc=>
-                    <form key={rc.id} onSubmit={handleSubmit} className='form-container d-none' id="editForm">
-                        <Form 
-                            name={rc.name}
-                            contact={rc.contact}
-                            nameError={nameError}
-                            phoneError={phoneError}
+                    <form key={rc.id} onSubmit={(e)=>handleUpdate(id,e)} className='form-container d-none' id="editForm">
+                        <Form
+                            handleChange={handleChange}
+                            error={error}
+                            defaultName={rc.name}
+                            defaultContact={rc.contact}
                         ></Form>
                     </form>
                     )
