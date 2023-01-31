@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../../Styles/style.scss'
-import Form from '../Utils/Form/FormDeafult';
-import useForm from '../Utils/Form/useForm';
-
 
 const Details = () => {
-    const {handleChange,error,errorCount} = useForm();
     const [data,setData] = useState([]);
     const { id } = useParams();
-    const navigate = useNavigate();
    
     const getfilteredData = () => {
         const parsedArr = JSON.parse(localStorage.getItem("information"));
@@ -21,37 +16,6 @@ const Details = () => {
         getfilteredData();
     },[])
 
-     // handleUpdate
-   const handleUpdate = (id,e) => {
-    e.preventDefault();
-    const name = document.getElementById("name").value;
-    const contact = document.getElementById("contact").value;
-    console.log(name);
-    const records = JSON.parse(localStorage.getItem("information"));
-    const filtered = records.findIndex(fd => fd.id === id); 
-    if(errorCount===0){
-    records[filtered].name=name;
-    records[filtered].contact=contact;
-    localStorage.setItem('information',JSON.stringify(records));
-    getfilteredData();
-    }
-    else{
-      alert("Please provide a valid input")
-    }
-}
-    
-    const handleDelete = (id) => {
-        const records = JSON.parse(localStorage.getItem("information"))
-        const filtered = records.filter(fd=> fd.id !==id);
-        localStorage.setItem('information', JSON.stringify(filtered));
-        navigate("/");
-    }
-
-    const handleEdit = () => {
-        const form = document.getElementById("editForm");
-        form.classList.remove("d-none");
-    }
-   
     return (
         <div className='details-table table'>
             <h2>Record Book</h2>
@@ -59,8 +23,6 @@ const Details = () => {
                 <div className='theader'>
                     <div className='table_header'>Name</div>
                     <div className='table_header'>Contact</div>
-                    <div className='table_header'>Edit</div>
-                    <div className='table_header'>Delete</div>
                 </div>
                 {   
                     data?.map((dt,i)=>
@@ -73,30 +35,10 @@ const Details = () => {
                             <div className='table_cell th-sm-bg'>Contact</div>
                             <div className='table_cell'>{dt.contact}</div>
                         </div>
-                        <div className='table_small'>
-                            <div className='table_cell th-sm-bg'>Edit</div>
-                            <div className='table_cell'><button onClick={handleEdit} className='btn edt-btn'>Edit</button></div>
-                        </div> 
-                        <div className='table_small'>
-                            <div className='table_cell th-sm-bg'>Delete</div>
-                            <div className='table_cell'><button onClick={()=> handleDelete(`${id}`)} className='btn dlt-btn'>Delete</button></div>
-                        </div>          
                     </div>
                     )
                 }         
             </div>
-            {
-                data.map(rc=>
-                    <form key={rc.id} onSubmit={(e)=>handleUpdate(id,e)} className='form-container d-none' id="editForm">
-                        <Form
-                            handleChange={handleChange}
-                            error={error}
-                            defaultName={rc.name}
-                            defaultContact={rc.contact}
-                        ></Form>
-                    </form>
-                    )
-            }                               
         </div>
     );
 };
