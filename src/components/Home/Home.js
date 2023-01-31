@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link} from 'react-router-dom';
 import '../../Styles/style.scss'
 import FormDefault from '../Utils/Form/FormDeafult';
 import useForm from '../Utils/Form/useForm';
 import useData from '../Utils/Form/useData';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {  
-    const {handleChange,error,handleAddRecord} = useForm();
-    const [data] = useData();
+    const {handleChange,error,values,errorCount} = useForm();
+    const [data,setData] = useState([])
+    const getData = () => {
+        const parsedArr = JSON.parse(localStorage.getItem("information"));    
+        setData(parsedArr);  
+    }
+    useEffect(()=> {
+       getData()
+    },[])
+
+    const handleAddRecord = (e) => {
+        e.preventDefault();
+        if(errorCount===0){
+        const person = {
+            id: uuidv4(),
+            name:values.name,
+            contact:values.contact
+        }
+        // create a new array and push data as object in new array
+        if(!data){
+            let newData = [];
+            newData.push(person)
+            localStorage.setItem('information', JSON.stringify(newData));
+            getData();
+        }
+        // push data to existing array
+        else {
+            const existData = JSON.parse(localStorage.getItem("information"));
+            existData.push(person);
+            localStorage.setItem('information', JSON.stringify(existData)); 
+            getData();    
+        } 
+         
+      }
+      else {
+        alert("Please provide a valid input")
+      }
+    } 
 
     return (
         <div className='wrapper-main'>      

@@ -6,7 +6,7 @@ import useForm from '../Utils/Form/useForm';
 
 
 const Details = () => {
-    const {handleChange,error,handleUpdate} = useForm();
+    const {handleChange,error,errorCount} = useForm();
     const [data,setData] = useState([]);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -19,7 +19,26 @@ const Details = () => {
 
     useEffect(()=> {
         getfilteredData();
-    },[data])
+    },[])
+
+     // handleUpdate
+   const handleUpdate = (id,e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const contact = document.getElementById("contact").value;
+    console.log(name);
+    const records = JSON.parse(localStorage.getItem("information"));
+    const filtered = records.findIndex(fd => fd.id === id); 
+    if(errorCount===0){
+    records[filtered].name=name;
+    records[filtered].contact=contact;
+    localStorage.setItem('information',JSON.stringify(records));
+    getfilteredData();
+    }
+    else{
+      alert("Please provide a valid input")
+    }
+}
     
     const handleDelete = (id) => {
         const records = JSON.parse(localStorage.getItem("information"))
