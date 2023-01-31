@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 
 const useData = () => {
     const [data,setData] = useState([])
-    const getData = () => {
+    useEffect(()=> {
         const parsedArr = JSON.parse(localStorage.getItem("information"));    
         setData(parsedArr);  
-    }
- 
-    useEffect(()=> {
-        getData();
-    },[data])
+       
+    },[])
 
     return [data]
 };
