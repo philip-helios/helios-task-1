@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../../Styles/style.scss';
-import validateInput from './validateInput';
 
-const FormDefault = ({handleChange,values}) => {
-    const [error,setError] = useState(); 
-    useEffect(()=> {
-        const error = validateInput(values)
-        setError(error);
-        console.log(error.status) 
-     },[values])
+const FormDefault = ({handleChange,values,error}) => {
+    
     return (
         <div className='form-container'>
                 <h2 className='text-center'>Add Record</h2>

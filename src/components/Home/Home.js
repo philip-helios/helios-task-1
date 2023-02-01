@@ -8,9 +8,8 @@ import validateInput from '../Utils/Form/validateInput';
 const Home = () => {    
     const [data,setData] = useState([]);
     const [isEdit,setIsEdit] = useState(false);
-    const [error,setError] = useState(); 
     const [values, setValues] = useState({name:"",contact:""});
-    
+    const [error,setError] = useState(); 
     const handleChange = (e) => {
         setValues({
         ...values,  
@@ -23,9 +22,9 @@ const Home = () => {
         setData(parsedArr);  
     }
     useEffect(()=> {
-    //    const error = validateInput(values)
-    //    setError(error);
-    //    console.log(error.status) 
+        const error = validateInput(values)
+        setError(error);
+        console.log(error.status)
        getData()
     },[values])
 
